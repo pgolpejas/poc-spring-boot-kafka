@@ -1,0 +1,69 @@
+spring:
+  ######## Jackson Configuration  #########
+  jackson:
+    serialization:
+      write_dates_as_timestamps: false
+      fail-on-empty-beans: false
+    time-zone: Europe/Madrid
+
+  ######## JPA Configuration  #########
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        hbm2ddl:
+          auto: create
+        jdbc:
+          time_zone: Europe/Paris
+    open-in-view: false
+
+  ######## Database Configuration  #########
+  datasource:
+    jdbcUrl: jdbc:postgresql://localhost:5532/poc-db-postgresql
+    url: jdbc:postgresql://localhost:5532/poc-db-postgresql
+    driverClassName: org.postgresql.Driver
+    username: admin
+    password: admin
+    poolName: postgresPool
+    maxLifetime: 1200000
+    maximumPoolSize: 1000000000
+    minimumIdle: 1
+
+  ######## Errors Configuration  #########
+  mvc:
+    problemdetails:
+      enabled: true
+
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: group-id
+      auto-offset-reset: earliest
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+######## OpenApi Configuration  #########
+springdoc:
+  swagger-ui:
+    path: /
+    disable-swagger-default-url: 'true'
+info:
+  title: '@project.name@'
+  version: '@project.version@'
+  description: '@project.description@'
+
+######## Actuator Configuration  #########
+management:
+  endpoints:
+    web:
+      exposure:
+        include:*
+
+
+
+
+
