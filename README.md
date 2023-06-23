@@ -2,11 +2,11 @@
 
 ## What is this service for? ##
 
-* POC Ávoristech with:
+* POC with:
   * Java 17
   * Spring boot 3.0
   * PostgreSQL 15.3
-  * Kafka 7.3.2
+  * Kafka 
   * Hexagonal Architecture
   * TestContainers
   * Locust
