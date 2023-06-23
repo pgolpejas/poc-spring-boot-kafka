@@ -54,7 +54,7 @@ class HotelAvailabilityControllerIT extends BaseTestContainer {
     @Test
     @Order(10)
     void search() throws Exception {
-        String hotelId = "1234Abc";
+        String hotelId = "4321Abc";
         HotelAvailabilitySearchDto searchDto = new HotelAvailabilitySearchDto(hotelId, LocalDate.now(), LocalDate.now(), List.of(1, 2, 3));
         String searchId = SearchIdGenerator.generateSearchId(mapper.toHotelAvailabilitySearch(searchDto));
 
@@ -88,7 +88,7 @@ class HotelAvailabilityControllerIT extends BaseTestContainer {
     @Test
     @Order(30)
     void searchSimilar() throws Exception {
-        String hotelId = "1234Abc";
+        String hotelId = "4321Abc";
         HotelAvailabilitySearchDto searchDto = new HotelAvailabilitySearchDto(hotelId, LocalDate.now(), LocalDate.now(), List.of(3, 2, 1));
         String searchId = SearchIdGenerator.generateSearchId(mapper.toHotelAvailabilitySearch(searchDto));
 
@@ -110,7 +110,7 @@ class HotelAvailabilityControllerIT extends BaseTestContainer {
         // Waiting for the message to be consumed
         TimeUnit.MILLISECONDS.sleep(500);
 
-        String hotelId = "1234Abc";
+        String hotelId = "4321Abc";
         HotelAvailabilitySearchDto searchDto = new HotelAvailabilitySearchDto(hotelId, LocalDate.now(), LocalDate.now(), List.of(1, 2, 3));
         String searchId = SearchIdGenerator.generateSearchId(mapper.toHotelAvailabilitySearch(searchDto));
 
