@@ -42,9 +42,6 @@ jobs:
       - name: Integration Tests
         run: mvn clean verify
 
-      - name: Integration Tests
-        run: mvn sonar:sonar -Dsonar.login=${{secrets.SONAR_TOKEN}}
-
       - name: Generate JaCoCo Badge
         uses: cicirello/jacoco-badge-generator@v2
         with:
@@ -67,6 +64,9 @@ jobs:
         with:
           name: jacoco-report
           path: target/site/jacoco/
+
+      - name: Sonar
+        run: mvn sonar:sonar -Dsonar.login=${{secrets.SONAR_TOKEN}}
 
       - name: Rename the artifact
         run: cp target/poc-spring-boot-kafka-0.0.1.jar poc-spring-boot-kafka-0.0.1.jar
