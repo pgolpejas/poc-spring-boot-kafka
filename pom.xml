@@ -29,7 +29,7 @@
         <skipIntegrationTests>${skipTests}</skipIntegrationTests>
 
         <!-- sonar properties-->
-        <sonar.projectKet>pgolpejas_poc-spring-boot-kafka</sonar.projectKet>
+        <sonar.projectKey>poc-spring-boot-kafka</sonar.projectKey>
         <sonar.organization>psanchez78</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <sonar.coverage.exclusions>

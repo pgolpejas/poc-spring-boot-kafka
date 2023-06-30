@@ -1,10 +1,10 @@
 ![coverage](.github/badges/jacoco.svg)
 ![branches](.github/badges/branches.svg)
 
-[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-black.svg)](https://sonarcloud.io/dashboard?id=com%3Apoc-spring-boot-kafka)
-[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=com:poc-spring-boot-kafka&metric=bugs)](https://sonarcloud.io/dashboard?id=com%3Apoc-spring-boot-kafka)
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=com:poc-spring-boot-kafka&metric=coverage)](https://sonarcloud.io/dashboard?id=com%3Apoc-spring-boot-kafka)
-[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=com:poc-spring-boot-kafka&metric=ncloc)](https://sonarcloud.io/dashboard?id=com%3Apoc-spring-boot-kafka)
+[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-black.svg)](https://sonarcloud.io/dashboard?id=poc-spring-boot-kafka)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=poc-spring-boot-kafka&metric=bugs)](https://sonarcloud.io/dashboard?id=poc-spring-boot-kafka)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=poc-spring-boot-kafka&metric=coverage)](https://sonarcloud.io/dashboard?id=poc-spring-boot-kafka)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=poc-spring-boot-kafka&metric=ncloc)](https://sonarcloud.io/dashboard?id=poc-spring-boot-kafka)
 
 # README #
 
@@ -52,6 +52,11 @@ Once started, the service can be reached at <http://localhost:8080>.
 Run coverage with maven (docker-compose does not need to be running)
 ```
 mvn clean verify
+```
+
+Run sonar
+```
+mvn sonar:sonar -Dsonar.login={{SONAR_TOKEN}}
 ```
 
 Open target/site/jacoco-ut/index.html and check coverage

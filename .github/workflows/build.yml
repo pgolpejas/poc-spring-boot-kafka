@@ -42,6 +42,9 @@ jobs:
       - name: Integration Tests
         run: mvn clean verify
 
+      - name: Integration Tests
+        run: mvn sonar:sonar -Dsonar.login=${{secrets.SONAR_TOKEN}}
+
       - name: Generate JaCoCo Badge
         uses: cicirello/jacoco-badge-generator@v2
         with:
