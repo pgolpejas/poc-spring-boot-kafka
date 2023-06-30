@@ -1,5 +1,11 @@
 ![coverage](.github/badges/jacoco.svg)
 ![branches](.github/badges/branches.svg)
+
+[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-black.svg)](https://sonarcloud.io/dashboard?id=com%3Apoc-spring-boot-kafka)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=com:poc-spring-boot-kafka&metric=bugs)](https://sonarcloud.io/dashboard?id=com%3Apoc-spring-boot-kafka)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=com:poc-spring-boot-kafka&metric=coverage)](https://sonarcloud.io/dashboard?id=com%3Apoc-spring-boot-kafka)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=com:poc-spring-boot-kafka&metric=ncloc)](https://sonarcloud.io/dashboard?id=com%3Apoc-spring-boot-kafka)
+
 # README #
 
 ## What is this service for? ##
