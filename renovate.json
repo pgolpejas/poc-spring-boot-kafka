@@ -2,7 +2,7 @@
   "extends": [
     "config:recommended"
   ],
-  "repositories": ['pgolpejas/poc-spring-boot-kafka'],
+  "repositories": ["pgolpejas/poc-spring-boot-kafka"],
   "packageRules": [
     {
       "matchManagers": [
