@@ -1,8 +1,10 @@
 name: Renovate
 
 on:
-  schedule:
-    - cron: '*/2 * * * *'
+  push:
+    branches:
+      - main
+      - master
 
 jobs:
   renovate:
