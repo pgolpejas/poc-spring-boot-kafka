@@ -3,6 +3,8 @@
     "config:recommended"
   ],
   "repositories": ["pgolpejas/poc-spring-boot-kafka"],
+  "prHourlyLimit": 10,
+  "prConcurrentLimit": 20,
   "packageRules": [
     {
       "matchManagers": [
