@@ -35,10 +35,10 @@ jobs:
             ${{ runner.os }}-maven-
 
       - name: Unit Tests
-        run: mvnw -B clean package
+        run: ./mvnw -B clean package
 
       - name: Integration Tests
-        run: mvnw -B clean verify
+        run: ./mvnw -B clean verify
 
       - name: Generate JaCoCo Badge
         uses: cicirello/jacoco-badge-generator@v2
@@ -64,7 +64,7 @@ jobs:
           path: target/site/jacoco/
 
       - name: Sonar
-        run: mvnw -B sonar:sonar -Dsonar.login=${{secrets.SONAR_TOKEN}}
+        run: ./mvnw -B sonar:sonar -Dsonar.login=${{secrets.SONAR_TOKEN}}
 
       - name: Rename the artifact
         run: cp target/poc-spring-boot-kafka-0.0.1.jar poc-spring-boot-kafka-0.0.1.jar
