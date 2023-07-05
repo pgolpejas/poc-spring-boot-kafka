@@ -8,7 +8,8 @@
       "matchManagers": [
         "docker-compose", 
         "dockerfile",
-        "maven"
+        "maven",
+        "maven-wrapper"
       ],
       "matchUpdateTypes": [
         "minor",
