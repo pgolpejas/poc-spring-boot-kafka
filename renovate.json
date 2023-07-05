@@ -2,6 +2,7 @@
   "extends": [
     "config:recommended"
   ],
+  "repositories": ['poc-spring-boot-kafka'],
   "packageRules": [
     {
       "matchUpdateTypes": [
