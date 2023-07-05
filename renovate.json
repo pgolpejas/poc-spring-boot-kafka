@@ -5,6 +5,11 @@
   "repositories": ['pgolpejas/poc-spring-boot-kafka'],
   "packageRules": [
     {
+      "matchManagers": [
+        "docker-compose", 
+        "dockerfile",
+        "maven"
+      ],
       "matchUpdateTypes": [
         "minor",
         "patch",
