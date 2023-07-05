@@ -14,7 +14,7 @@ services:
       - 5532:5432
 
   zoo1:
-    image: confluentinc/cp-zookeeper:7.3.2
+    image: confluentinc/cp-zookeeper:7.4.0
     hostname: zoo1
     container_name: zoo1
     ports:
