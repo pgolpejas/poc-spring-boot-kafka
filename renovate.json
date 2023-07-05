@@ -5,6 +5,7 @@
   "repositories": ["pgolpejas/poc-spring-boot-kafka"],
   "prHourlyLimit": 10,
   "prConcurrentLimit": 20,
+  "branchPrefix": "renovate/",
   "packageRules": [
     {
       "matchManagers": [
