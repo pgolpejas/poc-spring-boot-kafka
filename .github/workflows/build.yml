@@ -23,10 +23,8 @@ jobs:
           java-version: '17'
           distribution: 'adopt'
 
-      - name: Setup Maven
-        uses: stCarolas/setup-maven@v4.4
-        with:
-          maven-version: 3.9.2
+      - name: Grant execute permission for mvnw
+        run: chmod +x mvnw
 
       - name: Cache local Maven repository
         uses: actions/cache@v3
@@ -37,10 +35,10 @@ jobs:
             ${{ runner.os }}-maven-
 
       - name: Unit Tests
-        run: mvn clean package
+        run: mvnw -B clean package
 
       - name: Integration Tests
-        run: mvn clean verify
+        run: mvnw -B clean verify
 
       - name: Generate JaCoCo Badge
         uses: cicirello/jacoco-badge-generator@v2
@@ -66,7 +64,7 @@ jobs:
           path: target/site/jacoco/
 
       - name: Sonar
-        run: mvn sonar:sonar -Dsonar.login=${{secrets.SONAR_TOKEN}}
+        run: mvnw -B sonar:sonar -Dsonar.login=${{secrets.SONAR_TOKEN}}
 
       - name: Rename the artifact
         run: cp target/poc-spring-boot-kafka-0.0.1.jar poc-spring-boot-kafka-0.0.1.jar
