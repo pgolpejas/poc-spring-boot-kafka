@@ -9,7 +9,10 @@
         "docker-compose", 
         "dockerfile",
         "maven",
-        "maven-wrapper"
+        "maven-wrapper",
+        "helmfile",
+        "helm-values",
+        "github-actions"
       ],
       "matchUpdateTypes": [
         "minor",
