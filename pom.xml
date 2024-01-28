@@ -62,7 +62,7 @@
 
         <!-- dependencies version-->
         <springdoc-openapi.version>2.3.0</springdoc-openapi.version>
-        <jpa-custom-types.version>3.5.1</jpa-custom-types.version>
+        <jpa-custom-types.version>3.7.0</jpa-custom-types.version>
         <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
     </properties>
     <dependencies>
