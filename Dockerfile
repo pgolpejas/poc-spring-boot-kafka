@@ -1,4 +1,4 @@
-FROM eclipse-temurin:17.0.10_7-jre-alpine
+FROM eclipse-temurin:21.0.2_13-jre-alpine
 ARG VERSION
 ARG JAR_FILE=poc-spring-boot-kafka-$VERSION.jar
 
