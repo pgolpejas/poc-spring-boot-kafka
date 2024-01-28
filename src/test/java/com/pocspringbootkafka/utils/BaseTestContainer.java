@@ -46,7 +46,7 @@ public abstract class BaseTestContainer {
         .withPassword(POSTGRES_PASSWORD);
 
     static KafkaContainer kafkaContainer =
-        new KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:7.3.2"))
+        new KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:7.5.3"))
             .withEnv("KAFKA_AUTO_CREATE_TOPICS_ENABLE", "true")
             .withEnv("KAFKA_GROUP_MAX_SESSION_TIMEOUT_MS", "1000000")
             .withEnv("KAFKA_CREATE_TOPICS", AppConstants.TOPIC_NAME)
