@@ -1,10 +1,7 @@
 name: code-maven-PR-verify
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-      - master
+  pull_request:
 
 jobs:
   tests:
@@ -16,7 +13,7 @@ jobs:
       pull-requests: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Timezone
         uses: szenius/set-timezone@v1.2
