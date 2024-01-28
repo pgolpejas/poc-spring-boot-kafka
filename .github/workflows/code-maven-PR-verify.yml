@@ -1,15 +1,16 @@
 name: code-maven-PR-verify
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-      - master
+  pull_request:
 
 jobs:
   tests:
     runs-on: ubuntu-latest
     name: Code / Verify
+    permissions:
+      contents: write
+      checks: write
+      pull-requests: write
     steps:
       - name: Checkout
         uses: actions/checkout@v3
