@@ -1,10 +1,19 @@
-name: deploy
+name: code-maven-PR-verify
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
+      - master
 
 jobs:
   tests:
     runs-on: ubuntu-latest
+    name: Code / Verify
+    permissions:
+      contents: write
+      checks: write
+      pull-requests: write
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -62,40 +71,3 @@ jobs:
 
       - name: Sonar
         run: ./mvnw -B sonar:sonar -Dsonar.login=${{secrets.SONAR_TOKEN}}
-
-      - name: Rename the artifact
-        run: cp target/poc-spring-boot-kafka-0.0.1.jar poc-spring-boot-kafka-0.0.1.jar
-
-      - name: Save the artifact
-        uses: actions/upload-artifact@master
-        with:
-          name: poc-spring-boot-kafka
-          path: poc-spring-boot-kafka-0.0.1.jar
-
-  upload-dockerhub:
-    runs-on: ubuntu-latest
-    needs: tests
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Get the artifact
-        uses: actions/download-artifact@master
-        with:
-          name: poc-spring-boot-kafka
-
-      - name: List files
-        run: ls
-
-      - name: docker login
-        env:
-          DOCKER_USER: ${{secrets.DOCKER_USER}}
-          DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
-        run: |
-          docker login -u ${{secrets.DOCKER_USER}} -p ${{secrets.DOCKER_PASSWORD}}
-
-      - name: Build the Docker image
-        run:  docker build -t ${{secrets.DOCKER_USER}}/poc-spring-boot-kafka --build-arg VERSION=0.0.1 .
-
-      - name: Docker Push
-        run: docker push ${{secrets.DOCKER_USER}}/poc-spring-boot-kafka

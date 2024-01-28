@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -45,10 +46,13 @@ class HotelAvailabilityServiceIT extends BaseTestContainer {
         Assertions.assertThat(searchIdReturn).as("searchId").isEqualTo(searchId);
     }
 
+    private final CountDownLatch waiter = new CountDownLatch(1);
+
     @Test
     @Order(2)
     void findById() throws InterruptedException {
-        TimeUnit.MILLISECONDS.sleep(500);
+        waiter.await(1000 * 500000, TimeUnit.NANOSECONDS); // 500ms
+
         HotelAvailabilityDbSearch searchReturn = hotelAvailabilityService.findById(searchId);
         Assertions.assertThat(searchReturn.searchId()).as("searchId").isEqualTo(searchId);
         Assertions.assertThat(searchReturn.hotelId()).as("hotelId").isEqualTo(hotelId);
