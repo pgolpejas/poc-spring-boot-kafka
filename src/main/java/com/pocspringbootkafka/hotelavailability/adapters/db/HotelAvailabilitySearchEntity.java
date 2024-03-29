@@ -1,11 +1,9 @@
 package com.pocspringbootkafka.hotelavailability.adapters.db;
 
-import io.hypersistence.utils.hibernate.type.array.ListArrayType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import org.hibernate.annotations.Type;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -29,7 +27,7 @@ class HotelAvailabilitySearchEntity {
     @Column(name = "check-out", nullable = false)
     private LocalDate checkOut;
 
-    @Type(ListArrayType.class)
+//    @Type(ListArrayType.class)
     @Column(name = "ages", columnDefinition = "integer[]", nullable = false)
     private List<Integer> ages;
 
