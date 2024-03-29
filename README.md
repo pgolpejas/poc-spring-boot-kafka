@@ -11,7 +11,7 @@
 ## What is this service for? ##
 
 * POC with:
-  * Java 17
+  * Java 21
   * Spring boot 3.0
   * PostgreSQL 15.3
   * Kafka 
@@ -25,7 +25,7 @@
 
 In order to build this service the following software should be installed and added to your PATH:
 
-- Java version 17
+- Java version 21
 - Apache Maven 3 (3.8.4+ recommended) (<https://maven.apache.org/download.cgi>)
 - Docker
 

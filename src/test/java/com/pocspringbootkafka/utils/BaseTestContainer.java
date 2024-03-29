@@ -6,7 +6,6 @@ import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
-import org.junit.jupiter.api.AfterAll;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -22,11 +21,9 @@ import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.KafkaContainer;
 import org.testcontainers.containers.PostgreSQLContainer;
-import org.testcontainers.containers.wait.strategy.Wait;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 
-import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -46,11 +43,11 @@ public abstract class BaseTestContainer {
         .withPassword(POSTGRES_PASSWORD);
 
     static KafkaContainer kafkaContainer =
-        new KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:7.5.3"))
+        new KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:7.6.0"))
             .withEnv("KAFKA_AUTO_CREATE_TOPICS_ENABLE", "true")
             .withEnv("KAFKA_GROUP_MAX_SESSION_TIMEOUT_MS", "1000000")
             .withEnv("KAFKA_CREATE_TOPICS", AppConstants.TOPIC_NAME)
-            .waitingFor(Wait.forLogMessage("Created topic .*", 3).withStartupTimeout(Duration.ofSeconds(30)))
+            //.waitingFor(Wait.forLogMessage("Created topic .*", 3).withStartupTimeout(Duration.ofSeconds(30)))
             .withReuse(true);
 
     static {
