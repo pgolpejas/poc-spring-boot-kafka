@@ -61,6 +61,10 @@ mvn sonar:sonar -Dsonar.login={{SONAR_TOKEN}}
 
 Open target/site/jacoco-ut/index.html and check coverage
 
+## Observality ## 
+
+Open grafana in http://localhost:3000. You can view logs with Loki, metrics and traces with tempo
+
 ## Performance test with locust ## 
 
 Running in Docker from /test/resources/locust
