@@ -4,6 +4,8 @@ import com.pocspringbootkafka.hotelavailability.domain.model.HotelAvailabilitySe
 import com.pocspringbootkafka.hotelavailability.ports.HotelAvailabilityMessagingProducerService;
 import com.pocspringbootkafka.shared.constants.AppConstants;
 import com.pocspringbootkafka.shared.utils.SearchIdGenerator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.Message;
@@ -14,6 +16,7 @@ import java.time.OffsetDateTime;
 
 @Service
 class HotelAvailabilityKafkaProducer implements HotelAvailabilityMessagingProducerService {
+    Logger log = LoggerFactory.getLogger(HotelAvailabilityKafkaProducer.class);
 
     public static final String X_KAFKA_TIME = "x-kafka-time";
 
@@ -25,11 +28,12 @@ class HotelAvailabilityKafkaProducer implements HotelAvailabilityMessagingProduc
 
     @Override
     public void sendMessage(HotelAvailabilitySearch search) {
+        log.info("sendMessage {}",search);
         Message<HotelAvailabilitySearch> message = MessageBuilder.withPayload(search)
-            .setHeader(KafkaHeaders.TOPIC, AppConstants.TOPIC_NAME)
-            .setHeader(KafkaHeaders.KEY, SearchIdGenerator.generateSearchId(search))
-            .setHeader(X_KAFKA_TIME, OffsetDateTime.now().toString())
-            .build();
+                .setHeader(KafkaHeaders.TOPIC, AppConstants.TOPIC_NAME)
+                .setHeader(KafkaHeaders.KEY, SearchIdGenerator.generateSearchId(search))
+                .setHeader(X_KAFKA_TIME, OffsetDateTime.now().toString())
+                .build();
 
         kafkaTemplate.send(message);
     }
