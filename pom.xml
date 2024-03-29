@@ -64,6 +64,9 @@
         <springdoc-openapi.version>2.4.0</springdoc-openapi.version>
         <jpa-custom-types.version>3.7.3</jpa-custom-types.version>
         <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
+        <!-- observability-->
+        <otel.version>1.33.0</otel.version>
+        <loki-logback-appender.version>1.5.1</loki-logback-appender.version>
     </properties>
     <dependencies>
         <dependency>
@@ -77,6 +80,10 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.kafka</groupId>
@@ -107,6 +114,23 @@
             <artifactId>mapstruct-processor</artifactId>
             <version>${org.mapstruct.version}</version>
             <scope>provided</scope>
+        </dependency>
+
+        <!-- observability-->
+        <dependency>
+            <groupId>io.opentelemetry.javaagent</groupId>
+            <artifactId>opentelemetry-javaagent</artifactId>
+            <version>${otel.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-prometheus</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.loki4j</groupId>
+            <artifactId>loki-logback-appender</artifactId>
+            <version>${loki-logback-appender.version}</version>
         </dependency>
 
 

@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: poc-spring-kafka  
   ######## Jackson Configuration  #########
   jackson:
     serialization:
@@ -33,7 +35,8 @@ spring:
   mvc:
     problemdetails:
       enabled: true
-
+  
+  ######## Kafka Configuration  #########
   kafka:
     consumer:
       bootstrap-servers: localhost:9092
@@ -45,6 +48,37 @@ spring:
       bootstrap-servers: localhost:9092
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+  
+######## Observability Configuration  #########      
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  health:
+    readiness-state:
+      enabled: true
+    liveness-state:
+      enabled: true
+  endpoint:
+    metrics:
+      enabled
+    shutdown:
+      enabled: true
+    health:
+      probes:
+        enabled: true
+  info:
+    env:
+      enabled: true
+  metrics:
+    tags:
+      application: ${spring.application.name}
+
+endpoints:
+  shutdown:
+    enabled: true
+
 
 ######## OpenApi Configuration  #########
 springdoc:
@@ -56,14 +90,21 @@ info:
   version: '@project.version@'
   description: '@project.description@'
 
-######## Actuator Configuration  #########
-management:
-  endpoints:
-    web:
-      exposure:
-        include:*
-
-
-
-
-
+######## Logger Configuration  #########
+logging:
+  pattern:
+    level: "%green(%d{ISO8601}) %highlight(%-5level) [%blue(%t)] %yellow([%X{traceId:-}] [%X{TraceID:-}] [%X{trace_id:-}]) %logger - %msg%n%throwable"
+  level:
+    org:
+      hibernate:
+        SQL: TRACE
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
+    root: INFO
+    org.springframework.web: INFO
+    com.pocspringbootkafka.hotelavailability: INFO
+    org.hibernate.orm.jdbc.bind: TRACE
+#    org.springframework.jdbc.core: TRACE
+  config: ./src/main/resources/logback-des.xml

@@ -7,12 +7,17 @@ import com.pocspringbootkafka.hotelavailability.domain.model.HotelAvailabilitySe
 import com.pocspringbootkafka.hotelavailability.ports.HotelAvailabilityRepository;
 import com.pocspringbootkafka.shared.constants.AppConstants;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.support.KafkaHeaders;
+import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 
 @Service
 class HotelAvailabilityKafkaConsumer {
+    Logger log = LoggerFactory.getLogger(HotelAvailabilityKafkaConsumer.class);
 
     private final HotelAvailabilityRepository hotelAvailabilityRepository;
     private final ObjectMapper objectMapper;
@@ -22,14 +27,18 @@ class HotelAvailabilityKafkaConsumer {
         this.objectMapper = objectMapper;
     }
 
-    @KafkaListener(topics = AppConstants.TOPIC_NAME, groupId = AppConstants.GROUP_ID)
-    public void consumeMessage(@Payload final ConsumerRecord<String, String> message) throws JsonProcessingException {
-        final String searchId = message.key();
+    @KafkaListener(id = "search", topics = AppConstants.TOPIC_NAME, groupId = AppConstants.GROUP_ID)
+    public void consumeMessage(@Payload final ConsumerRecord<String, String> message,
+                               @Header(name = KafkaHeaders.RECEIVED_KEY, required = false) String key,
+                               @Header(name = KafkaHeaders.OFFSET, required = false) Long offset,
+                               @Header(KafkaHeaders.RECEIVED_PARTITION) int partition
+    ) throws JsonProcessingException {
         final HotelAvailabilitySearch search = objectMapper.readValue(message.value(), HotelAvailabilitySearch.class);
+        log.info("Received(key={}, offset={}, partition={}): {}", key, offset, partition, search);
 
-        HotelAvailabilityDbSearch dtoToPersist = hotelAvailabilityRepository.findById(searchId)
-            .map(searchFound -> createHotelAvailabilityDbSearch(search, searchId, searchFound.count() + 1))
-            .orElse(createHotelAvailabilityDbSearch(search, searchId, 1));
+        HotelAvailabilityDbSearch dtoToPersist = hotelAvailabilityRepository.findById(key)
+                .map(searchFound -> createHotelAvailabilityDbSearch(search, key, searchFound.count() + 1))
+                .orElse(createHotelAvailabilityDbSearch(search, key, 1));
         hotelAvailabilityRepository.save(dtoToPersist);
     }
 

@@ -12,6 +12,8 @@ services:
       POSTGRES_PASSWORD: admin
     ports:
       - 5532:5432
+    networks:
+      - local-des
 
   zoo1:
     image: confluentinc/cp-zookeeper:7.6.0
@@ -23,6 +25,8 @@ services:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_SERVER_ID: 1
       ZOOKEEPER_SERVERS: zoo1:2888:3888
+    networks:
+      - local-des
 
   kafka1:
     image: confluentinc/cp-kafka:7.6.0
@@ -49,6 +53,8 @@ services:
     command: sh -c "((echo Waiting for Kafka to be ready... && sleep 15 && echo Creating topic... && kafka-topics --create --bootstrap-server kafka1:19092 --topic hotel_availability_searches --replication-factor 1 --partitions 1)&) && /etc/confluent/docker/run "
     depends_on:
       - zoo1
+    networks:
+      - local-des
 
   redpanda-local:
     image: 'docker.redpanda.com/redpandadata/console:latest'
@@ -61,3 +67,58 @@ services:
       - kafka1
     environment:
       KAFKA_BROKERS: kafka1:19092
+    networks:
+      - local-des
+      
+  loki-local:
+    image: grafana/loki:2.9.5
+    container_name: loki
+    ports:
+      - "3100:3100"
+    command: -config.file=/etc/loki/local-config.yaml
+    networks:
+      - local-des
+  
+  prometheus-local:
+    image: prom/prometheus
+    container_name: prometheus
+    volumes:
+      - ./observability/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - 9090:9090
+    #   Add 127.0.0.0	host-gateway to /etc/hosts in ubuntu systems
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    
+    networks:
+      - local-des
+  
+  tempo-local:
+    image: grafana/tempo
+    container_name: tempo
+    command: -config.file /etc/tempo-config.yml
+    ports:
+      - "3110:3100"
+      - "4317:4317"
+    volumes:
+      - ./observability/tempo/tempo.yml:/etc/tempo-config.yml
+    networks:
+      - local-des
+  
+  grafana-local:
+    image: grafana/grafana:latest
+    container_name: grafana
+    restart: always
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./observability/grafana/provisioning:/etc/grafana/provisioning
+      - ./observability/grafana/grafana.ini:/etc/grafana/grafana.ini
+    env_file:
+      - ./observability/grafana/grafana.env
+    networks:
+      - local-des
+  
+networks:
+  local-des:
+    name: local_des_network      
