@@ -29,7 +29,7 @@ services:
       - local-des
 
   kafka1:
-    image: confluentinc/cp-kafka:7.6.0
+    image: confluentinc/cp-kafka:7.6.1
     hostname: kafka1
     container_name: kafka1
     ports:
