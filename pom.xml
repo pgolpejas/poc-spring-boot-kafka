@@ -66,7 +66,7 @@
         <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
         <!-- observability-->
         <otel.version>2.5.0</otel.version>
-        <loki-logback-appender.version>1.5.1</loki-logback-appender.version>
+        <loki-logback-appender.version>1.5.2</loki-logback-appender.version>
     </properties>
     <dependencies>
         <dependency>
