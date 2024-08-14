@@ -63,7 +63,7 @@
         <!-- dependencies version-->
         <springdoc-openapi.version>2.6.0</springdoc-openapi.version>
         <jpa-custom-types.version>3.7.3</jpa-custom-types.version>
-        <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
+        <org.mapstruct.version>1.6.0</org.mapstruct.version>
         <!-- observability-->
         <otel.version>2.6.0</otel.version>
         <loki-logback-appender.version>1.5.2</loki-logback-appender.version>
