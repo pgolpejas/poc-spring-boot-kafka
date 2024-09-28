@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   poc-db:
-    image: postgres:16.4
+    image: postgres:17.0
     hostname: poc-db-postgresql
     container_name: poc-db-postgresql
     restart: unless-stopped
