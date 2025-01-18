@@ -65,7 +65,7 @@
         <jpa-custom-types.version>3.7.3</jpa-custom-types.version>
         <org.mapstruct.version>1.6.3</org.mapstruct.version>
         <!-- observability-->
-        <otel.version>2.11.0</otel.version>
+        <otel.version>2.12.0</otel.version>
         <loki-logback-appender.version>1.6.0</loki-logback-appender.version>
     </properties>
     <dependencies>
