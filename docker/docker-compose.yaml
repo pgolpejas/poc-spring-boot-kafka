@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   poc-db:
-    image: postgres:17.6
+    image: postgres:18.1
     hostname: poc-db-postgresql
     container_name: poc-db-postgresql
     restart: unless-stopped
@@ -29,7 +29,7 @@ services:
       - local-des
 
   kafka1:
-    image: confluentinc/cp-kafka:8.0.0
+    image: confluentinc/cp-kafka:8.1.0
     hostname: kafka1
     container_name: kafka1
     ports:
