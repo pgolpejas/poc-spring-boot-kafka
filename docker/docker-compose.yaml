@@ -16,7 +16,7 @@ services:
       - local-des
 
   zoo1:
-    image: confluentinc/cp-zookeeper:7.9.2
+    image: confluentinc/cp-zookeeper:7.9.4
     hostname: zoo1
     container_name: zoo1
     ports:
